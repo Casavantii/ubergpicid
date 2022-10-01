@@ -13,7 +13,7 @@ app.get("/PicInputs", async (req, res) => {
   return res.status(200).json(allPicInputs);
 });
 app.get("/", function(req, res){
-  res.render("Hi the server is up");
+  res.send("Hi the server is up");
 });
 
 // app.get("/dogs/:id", async (req, res) => {
@@ -44,7 +44,8 @@ app.post("/picInput", async (req, res) => {
 const start = async () => {
   try {
     const { MongoClient, ServerApiVersion } = require('mongodb');
-    const uri = "mongodb+srv://Uberg_Group1:Bishops1@cluster0.fv3yghu.mongodb.net/?retryWrites=true&w=majority";
+    // const uri = "mongodb+srv://Uberg_Group1:Bishops1@cluster0.fv3yghu.mongodb.net/?retryWrites=true&w=majority";
+    const uri = process.env.MONGODB_URI
     const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
     await client.connect(err => {
       const collection = client.db("test").collection("devices");
